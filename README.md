@@ -16,6 +16,25 @@ My personal portfolio — an immersive, scroll-driven website with 3D motion, gl
 - **JavaScript** — interactivity
 - **GSAP** — scroll-based and timeline animations
 
+## 📄 What's on the page
+
+- **Hero** — full-screen intro over `assets/welcome.mp4`, with a fallback panel if the video can't play
+- **Name reveal** — large animated name section
+- **About** — short bio, plus Frontend / Web Animation / UI-UX / AI Tools tags
+- **Skills** — horizontal-scrolling track of five cards (Frontend, Programming, Design, AI & Prompting, Tools)
+- **Projects** — three mock-window showcases: Animated Portfolio, Automation Toolkit (Python), Console Utilities (C)
+- **Journey** — education timeline, ending in the current B.E. CSE run at Chitkara University
+- **Contact** — email, LinkedIn, and Instagram links
+
+## 🎬 Animation
+
+No build step — everything runs from the single `index.html`:
+
+- **GSAP + ScrollTrigger** — scroll reveals, the skills-track pin, the timeline fill, and the snake path that draws down the page as you scroll
+- **Lenis** — smooth scrolling, wired into ScrollTrigger
+- **Custom cursor** — a blend-difference ring + dot that follows the mouse
+- **Click sound** — a short WebAudio pop on click, no audio files needed
+
 ## 🚀 Run locally
 
 ```bash
