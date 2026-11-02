@@ -408,9 +408,13 @@ footer{display:flex;justify-content:space-between;align-items:center;padding:40p
     v.addEventListener('error',showFb);var s=v.querySelector('source');if(s)s.addEventListener('error',showFb);
     if(v.readyState>=2)hideFb();
     var plays=0,capped=false;
-    v.muted=false;
-    v.play().catch(function(){v.muted=true;syncBtn();v.play().catch(function(){});});
-    function kick(){if(capped)return;v.muted=false;v.play().catch(function(){});syncBtn();}
+    // Start muted so autoplay succeeds under browser autoplay policy; sound
+    // returns on the first real interaction, or via the unmute button. The
+    // kick guard matters: a pointerdown on the unmute button must not unmute
+    // first, or the button's own toggle would immediately mute it again.
+    v.muted=true;syncBtn();
+    v.play().catch(function(){});
+    function kick(e){if(capped)return;if(e&&e.target&&e.target.closest&&e.target.closest('#unmuteBtn'))return;v.muted=false;v.play().catch(function(){});syncBtn();}
     ['pointerdown','keydown','wheel','touchstart'].forEach(function(ev){window.addEventListener(ev,kick,{once:true});});
     v.addEventListener('ended',function(){plays++;if(plays<2){v.currentTime=0;v.play().catch(function(){});}else{capped=true;v.muted=true;v.loop=true;v.currentTime=0;v.play().catch(function(){});syncBtn();}});
     syncBtn();
