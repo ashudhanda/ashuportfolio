@@ -532,7 +532,7 @@ if(window.gsap){
 
   gsap.utils.toArray('.project-inner').forEach(function(inner){gsap.fromTo(inner,{rotateX:12,transformPerspective:1300,transformOrigin:'center top'},{rotateX:0,ease:'none',scrollTrigger:{trigger:inner,start:'top 92%',end:'top 45%',scrub:1}});});
 
-  ['.skill-card','.head','.about-photo'].forEach(function(sel){document.querySelectorAll(sel).forEach(function(el){el.classList.add('skewElem');});});
+  ['.skill-card','.head'].forEach(function(sel){document.querySelectorAll(sel).forEach(function(el){el.classList.add('skewElem');});});
   var skewSet=gsap.quickSetter('.skewElem','skewY','deg');var sp={s:0};var clampSkew=gsap.utils.clamp(-7,7);
   ScrollTrigger.create({onUpdate:function(self){var sk=clampSkew(self.getVelocity()/-320);if(Math.abs(sk)>Math.abs(sp.s)){sp.s=sk;gsap.to(sp,{s:0,duration:.7,ease:'power3',overwrite:true,onUpdate:function(){skewSet(sp.s);}});}}});
 }
