@@ -507,11 +507,17 @@ document.querySelectorAll('.mask-reveal').forEach(function(el){if(el.querySelect
 
 if(window.gsap){
   gsap.registerPlugin(ScrollTrigger);
-  if(window.Lenis && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){var lenis=new Lenis({lerp:0.08,smoothWheel:true});function raf(t){lenis.raf(t);requestAnimationFrame(raf);}requestAnimationFrame(raf);lenis.on('scroll',ScrollTrigger.update);}
+  /* CSS already kills CSS animations under reduced motion, but GSAP drives
+     transforms from JS, so skip the timed and enter animations here too.
+     Scrub-linked animations stay: they follow scroll position, not time. */
+  var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(window.Lenis && !reduceMotion){var lenis=new Lenis({lerp:0.08,smoothWheel:true});function raf(t){lenis.raf(t);requestAnimationFrame(raf);}requestAnimationFrame(raf);lenis.on('scroll',ScrollTrigger.update);}
 
+  if(!reduceMotion){
   gsap.from('.hero-overlay .word span',{yPercent:120,opacity:0,duration:1,delay:.9,stagger:.08,ease:'power4.out'});
   gsap.from('.hero-overlay p,.hero-actions',{y:24,opacity:0,duration:.9,delay:1.6,stagger:.12,ease:'power3.out'});
   gsap.from('.hero-media',{opacity:0,scale:1.06,duration:1.6,delay:.4,ease:'power3.out'});
+  }
 
   window.addEventListener('mousemove',function(e){var x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);
     gsap.to('.orb.a',{x:x*60,y:y*60,duration:1.2,ease:'power2.out'});
@@ -525,9 +531,11 @@ if(window.gsap){
   });
 
   gsap.fromTo('.name-big',{scale:0.7,opacity:0,rotateX:40},{scale:1,opacity:1,rotateX:0,ease:'power3.out',scrollTrigger:{trigger:'#name-reveal',start:'top 80%',end:'center center',scrub:1}});
+  if(!reduceMotion){
   gsap.utils.toArray('.reveal-left').forEach(function(el){gsap.from(el,{x:-90,opacity:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 82%'}});});
   gsap.utils.toArray('.reveal-right').forEach(function(el){gsap.from(el,{x:90,opacity:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 82%'}});});
   gsap.utils.toArray('.tl-item').forEach(function(el){gsap.from(el,{x:40,opacity:0,duration:.8,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 88%'}});});
+  }
 
   var track=document.querySelector('.skills-track');
   if(track){var scrollLen=track.scrollWidth-innerWidth+(innerWidth*0.1);gsap.to(track,{x:-scrollLen,ease:'none',scrollTrigger:{trigger:'#skills',start:'top top',end:'+='+scrollLen,scrub:1,pin:true,anticipatePin:1}});}
@@ -536,7 +544,9 @@ if(window.gsap){
   gsap.utils.toArray('.project-media').forEach(function(el){gsap.fromTo(el,{y:60},{y:-60,ease:'none',scrollTrigger:{trigger:el,start:'top bottom',end:'bottom top',scrub:1}});});
   document.querySelectorAll('.tilt').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();var x=(e.clientX-r.left)/r.width-.5;var y=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(900px) rotateY('+(x*8)+'deg) rotateX('+(-y*8)+'deg) scale(1.02)';});c.addEventListener('mouseleave',function(){c.style.transform='perspective(900px) rotateY(0) rotateX(0)';});});
 
+  if(!reduceMotion){
   gsap.utils.toArray('.mask-inner').forEach(function(s){gsap.from(s,{yPercent:118,duration:1.1,ease:'power4.out',scrollTrigger:{trigger:s,start:'top 90%'}});});
+  }
 
   gsap.utils.toArray('.project-inner').forEach(function(inner){gsap.fromTo(inner,{rotateX:12,transformPerspective:1300,transformOrigin:'center top'},{rotateX:0,ease:'none',scrollTrigger:{trigger:inner,start:'top 92%',end:'top 45%',scrub:1}});});
 
