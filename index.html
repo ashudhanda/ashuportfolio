@@ -503,6 +503,9 @@ document.querySelectorAll('.mask-reveal').forEach(function(el){if(el.querySelect
   window.addEventListener('scroll',update,{passive:true});
   var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(build,150);});
   setTimeout(build,60);window.addEventListener('load',function(){setTimeout(build,220);});
+  /* Webfont swaps change section heights, which moves the snake nodes, so
+     rebuild once fonts settle (guarded: document.fonts is not universal). */
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){build();});}
 })();
 
 if(window.gsap){
