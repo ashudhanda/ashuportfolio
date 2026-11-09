@@ -37,7 +37,16 @@ No build step — everything runs from the single `index.html`:
 - **Custom cursor** — a blend-difference ring + dot that follows the mouse
 - **Click sound** — a short WebAudio pop on click, no audio files needed; mute it with the sound toggle (bottom left)
 
+## ♿ Accessibility
+
+- **No-JS fallback** — the loader overlay is removed when JavaScript is off, so the page stays readable
+- **Reduced motion** — CSS animation and smooth scrolling switch off under `prefers-reduced-motion`, and the timed GSAP intro/enter animations are skipped too (scroll-linked motion follows the scroll position)
+- **Landmarks** — page sections sit inside a `<main>` landmark; the nav is labelled
+- **Keyboard** — back-to-top is a real button, so Enter/Space work without extra handlers
+
 ## 🚀 Run locally
+
+GSAP + Lenis load from CDNs, so an internet connection is needed for the animations.
 
 ```bash
 git clone https://github.com/ashudhanda/ashuportfolio.git
