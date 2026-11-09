@@ -206,7 +206,7 @@ footer{position:relative;z-index:1}
 .socials a{padding:12px 22px;border-radius:12px;font-size:14px}
 /* footer */
 footer{display:flex;justify-content:space-between;align-items:center;padding:40px 5vw;color:var(--muted);font-size:14px;flex-wrap:wrap;gap:14px}
-.to-top{cursor:none;font-family:var(--display)}
+.to-top{cursor:none;font-family:var(--display);background:none;border:0;padding:0;color:inherit;font-size:inherit}
 /* snake */
 #snake{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
 #snake .snake-base{fill:none;stroke:rgba(109,94,252,.12);stroke-width:16;stroke-linecap:round}
@@ -390,7 +390,7 @@ html:not(.js) body,html:not(.js) .btn,html:not(.js) .sound-btn,html:not(.js) .un
 </main>
 <footer>
   <div>© 2026 Ashu Dhanda</div>
-  <div class="to-top magnetic" tabindex="0" role="button" aria-label="Back to top">Back to top ↑</div>
+  <button type="button" class="to-top magnetic" aria-label="Back to top">Back to top ↑</button>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -555,8 +555,8 @@ if(window.gsap){
   ScrollTrigger.create({onUpdate:function(self){var sk=clampSkew(self.getVelocity()/-320);if(Math.abs(sk)>Math.abs(sp.s)){sp.s=sk;gsap.to(sp,{s:0,duration:.7,ease:'power3',overwrite:true,onUpdate:function(){skewSet(sp.s);}});}}});
 }
 
-/* ===== Back-to-top: keyboard support (the control is a div, not a button) ===== */
-(function(){var t=document.querySelector('.to-top');if(!t)return;function goTop(){window.scrollTo({top:0,behavior:'smooth'});}t.addEventListener('click',goTop);t.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();goTop();}});})();
+/* ===== Back to top (native button handles Enter/Space) ===== */
+(function(){var t=document.querySelector('.to-top');if(!t)return;t.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});})();
 </script>
 </body>
 </html>
