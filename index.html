@@ -223,6 +223,9 @@ footer{display:flex;justify-content:space-between;align-items:center;padding:40p
 .skewElem{will-change:transform;transform-origin:center center}
 @media(max-width:820px){#snake{opacity:.5}}
 .reveal{opacity:1}
+/* skip link: keyboard users jump straight to the content */
+.skip-link{position:fixed;top:-64px;left:16px;z-index:1100;padding:10px 16px;border-radius:12px;background:var(--text);color:#fff;font-size:14px;transition:top .2s}
+.skip-link:focus{top:16px}
 /* without JS there is no custom cursor, so keep the native pointer visible */
 html:not(.js) body,html:not(.js) .btn,html:not(.js) .sound-btn,html:not(.js) .unmute,html:not(.js) .to-top{cursor:auto}
 /* honor reduced-motion: stop decorative animation, keep content visible */
@@ -233,6 +236,7 @@ html:not(.js) body,html:not(.js) .btn,html:not(.js) .sound-btn,html:not(.js) .un
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <div class="bg-orbs" aria-hidden="true"><span class="orb a"></span><span class="orb b"></span><span class="orb c"></span></div>
 <div class="grain" aria-hidden="true"></div>
 <div id="cursorRing"></div>
@@ -251,7 +255,7 @@ html:not(.js) body,html:not(.js) .btn,html:not(.js) .sound-btn,html:not(.js) .un
   </ul>
   <a href="#contact" class="cta magnetic">Let’s talk</a>
 </nav>
-<main>
+<main id="main">
 <section id="hero">
   <div class="hero-media" id="heroMedia">
     <video autoplay playsinline muted aria-hidden="true">
