@@ -10,6 +10,9 @@ My personal portfolio — an immersive, scroll-driven website with 3D motion, gl
 - Custom interactions and transitions
 - Sound toggle — mute the WebAudio click pop (bottom left)
 - Reduced motion — CSS animation and smooth scrolling switch off under `prefers-reduced-motion`
+- Skip link — the first Tab stop jumps straight to the main content
+- Mobile menu — below 820px the nav collapses to a toggle button (Escape closes it)
+- Favicon + `og:url` — inline SVG favicon and the canonical URL of the live GitHub Pages site
 
 ## 🛠 Tech Stack
 
@@ -24,7 +27,7 @@ My personal portfolio — an immersive, scroll-driven website with 3D motion, gl
 - **Name reveal** — large animated name section
 - **About** — short bio, plus Frontend / Web Animation / UI-UX / AI Tools tags
 - **Skills** — horizontal-scrolling track of five cards (Frontend, Programming, Design, AI & Prompting, Tools)
-- **Projects** — three mock-window showcases: Animated Portfolio, Automation Toolkit (Python), Console Utilities (C)
+- **Projects** — three mock-window showcases: Animated Portfolio, Automation Toolkit (Python), Console Utilities (C). The Animated Portfolio card links to this repo; the other two have no live link yet, so their buttons are inert
 - **Journey** — education timeline, ending in the current B.E. CSE run at Chitkara University
 - **Contact** — email, LinkedIn, and Instagram links
 
@@ -43,6 +46,8 @@ No build step — everything runs from the single `index.html`:
 - **Reduced motion** — CSS animation and smooth scrolling switch off under `prefers-reduced-motion`, and the timed GSAP intro/enter animations are skipped too (scroll-linked motion follows the scroll position)
 - **Landmarks** — page sections sit inside a `<main>` landmark; the nav is labelled
 - **Keyboard** — back-to-top is a real button, so Enter/Space work without extra handlers
+- **Mobile menu** — the toggle button reports `aria-expanded`, closes when a link is tapped or Escape is pressed, and returns focus to the toggle
+- **Decorative numbers** — the large background numerals on the skill cards are hidden from assistive tech (the visible `01`–`05` labels already carry the number)
 
 ## 🚀 Run locally
 
