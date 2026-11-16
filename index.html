@@ -281,7 +281,7 @@ html:not(.js) .nav-toggle{display:none}
     </video>
     <div class="video-fallback"><div class="person">Ashu Dhanda — Creative Developer</div></div>
     <div class="video-fade"></div>
-    <button class="unmute glass" id="unmuteBtn">🔇 Unmute</button>
+    <button type="button" class="unmute glass" id="unmuteBtn">🔇 Unmute</button>
   </div>
   <div class="shell hero-content">
     <div class="hero-overlay">
@@ -447,10 +447,12 @@ html:not(.js) .nav-toggle{display:none}
     // returns on the first real interaction, or via the unmute button. The
     // kick guard matters: a pointerdown on the unmute button must not unmute
     // first, or the button's own toggle would immediately mute it again.
+    // No keydown here on purpose: Tab/arrow navigation must never unmute
+    // the video — keyboard users unmute with the button instead.
     v.muted=true;syncBtn();
     v.play().catch(function(){});
     function kick(e){if(capped)return;if(e&&e.target&&e.target.closest&&e.target.closest('#unmuteBtn'))return;v.muted=false;v.play().catch(function(){});syncBtn();}
-    ['pointerdown','keydown','wheel','touchstart'].forEach(function(ev){window.addEventListener(ev,kick,{once:true});});
+    ['pointerdown','wheel','touchstart'].forEach(function(ev){window.addEventListener(ev,kick,{once:true});});
     v.addEventListener('ended',function(){plays++;if(plays<2){v.currentTime=0;v.play().catch(function(){});}else{capped=true;v.muted=true;v.loop=true;v.currentTime=0;v.play().catch(function(){});syncBtn();}});
     syncBtn();
   }
