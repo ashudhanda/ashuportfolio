@@ -239,6 +239,12 @@ footer{display:flex;justify-content:space-between;align-items:center;padding:40p
 /* without JS there is no custom cursor, so keep the native pointer visible */
 html:not(.js) body,html:not(.js) .btn,html:not(.js) .sound-btn,html:not(.js) .unmute,html:not(.js) .to-top{cursor:auto}
 html:not(.js) .nav-toggle{display:none}
+/* touch devices have no mouse: the ring/dot would sit frozen mid-screen
+   (they only move on mousemove) and cursor:none hides the native pointer */
+@media (pointer:coarse){
+  #cursorRing,#cursorDot{display:none}
+  body,.btn,.sound-btn,.unmute,.to-top,.nav-toggle{cursor:auto}
+}
 /* honor reduced-motion: stop decorative animation, keep content visible */
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
