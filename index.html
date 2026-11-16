@@ -597,7 +597,7 @@ if(window.gsap){
 })();
 
 /* ===== Back to top (native button handles Enter/Space) ===== */
-(function(){var t=document.querySelector('.to-top');if(!t)return;t.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});})();
+(function(){var t=document.querySelector('.to-top');if(!t)return;var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;t.addEventListener('click',function(){window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});});})();
 </script>
 </body>
 </html>
