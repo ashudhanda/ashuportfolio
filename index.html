@@ -115,6 +115,9 @@ footer{position:relative;z-index:1}
 .scroll-ind .mouse{width:22px;height:36px;border:2px solid var(--muted);border-radius:12px;position:relative}
 .scroll-ind .mouse::after{content:'';position:absolute;top:7px;left:50%;transform:translateX(-50%);width:4px;height:7px;border-radius:2px;background:var(--muted);animation:wheel 1.4s ease-in-out infinite}
 @keyframes wheel{0%{opacity:0;transform:translate(-50%,0)}40%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
+/* below 820px the fixed sound button sits bottom-left too, so the scroll
+   indicator would print over it — hide it there, the hero still scrolls */
+@media(max-width:820px){.scroll-ind{display:none}}
 .hero-content{position:relative;z-index:2}
 .hero-overlay{max-width:620px}
 .hero-overlay h1{font-size:clamp(46px,7vw,104px);margin:14px 0 20px;text-shadow:0 1px 12px rgba(243,241,251,.55)}
