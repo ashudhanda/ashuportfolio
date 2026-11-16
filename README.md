@@ -13,6 +13,8 @@ My personal portfolio — an immersive, scroll-driven website with 3D motion, gl
 - Skip link — the first Tab stop jumps straight to the main content
 - Mobile menu — below 820px the nav collapses to a toggle button (Escape closes it)
 - Favicon + `og:url` — inline SVG favicon and the canonical URL of the live GitHub Pages site
+- Touch devices — the custom cursor ring/dot are hidden and the native pointer returns (they used to sit frozen mid-screen, since they only move on mousemove)
+- Mobile — the "Scroll to explore" indicator hides below 820px, where it printed over the fixed sound button
 
 ## 🛠 Tech Stack
 
@@ -43,9 +45,9 @@ No build step — everything runs from the single `index.html`:
 ## ♿ Accessibility
 
 - **No-JS fallback** — the loader overlay is removed when JavaScript is off, so the page stays readable
-- **Reduced motion** — CSS animation and smooth scrolling switch off under `prefers-reduced-motion`, and the timed GSAP intro/enter animations are skipped too (scroll-linked motion follows the scroll position)
+- **Reduced motion** — CSS animation and smooth scrolling switch off under `prefers-reduced-motion`, and the timed GSAP intro/enter animations are skipped too (scroll-linked motion follows the scroll position); back-to-top also scrolls instantly instead of smoothly
 - **Landmarks** — page sections sit inside a `<main>` landmark; the nav is labelled
-- **Keyboard** — back-to-top is a real button, so Enter/Space work without extra handlers
+- **Keyboard** — back-to-top is a real button, so Enter/Space work without extra handlers; pressing Tab never unmutes the hero video (keyboard users unmute with the Unmute button)
 - **Mobile menu** — the toggle button reports `aria-expanded`, closes when a link is tapped or Escape is pressed, and returns focus to the toggle
 - **Decorative numbers** — the large background numerals on the skill cards are hidden from assistive tech (the visible `01`–`05` labels already carry the number)
 
