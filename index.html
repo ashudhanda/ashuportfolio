@@ -53,8 +53,8 @@ h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.05;letter-spac
 /* glass */
 .glass{background:var(--glass);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);border:1px solid var(--glass-brd);box-shadow:var(--glass-shadow);position:relative;overflow:hidden}
 /* liquid glass: animated sheen + distortion layer */
-.glass::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,transparent 34%,rgba(255,255,255,.5) 49%,transparent 64%);background-size:250% 250%;background-position:150% 0;opacity:0;transition:opacity .4s ease;mix-blend-mode:screen;animation:sheen 5.5s linear infinite}
-.glass:hover::after{opacity:.75}
+.glass::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,transparent 34%,rgba(255,255,255,.5) 49%,transparent 64%);background-size:250% 250%;background-position:150% 0;opacity:0;transition:opacity .4s ease;mix-blend-mode:screen}
+.glass:hover::after{opacity:.75;animation:sheen 5.5s linear infinite}
 @keyframes sheen{0%{background-position:160% 0}100%{background-position:-130% 0}}
 .liquid-layer{position:absolute;inset:-8px;border-radius:inherit;z-index:0;filter:url(#glassDistort);background:linear-gradient(135deg,rgba(179,168,255,.55),rgba(255,190,214,.5),rgba(168,240,230,.45));opacity:.6}
 .contact-card>*:not(.liquid-layer){position:relative;z-index:1}
