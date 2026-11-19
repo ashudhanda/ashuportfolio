@@ -553,7 +553,9 @@ if(window.gsap){
   gsap.from('.hero-media',{opacity:0,scale:1.06,duration:1.6,delay:.4,ease:'power3.out'});
   }
 
-  window.addEventListener('mousemove',function(e){var x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);
+  /* The orb parallax is decorative motion driven from JS, so it is not
+     covered by the CSS reduced-motion kill-switch — skip it here too. */
+  window.addEventListener('mousemove',function(e){if(reduceMotion)return;var x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);
     gsap.to('.orb.a',{x:x*60,y:y*60,duration:1.2,ease:'power2.out'});
     gsap.to('.orb.b',{x:x*-70,y:y*-50,duration:1.2,ease:'power2.out'});
     gsap.to('.orb.c',{x:x*40,y:y*-40,duration:1.2,ease:'power2.out'});
