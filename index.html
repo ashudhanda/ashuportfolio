@@ -440,7 +440,9 @@ html:not(.js) .nav-toggle{display:none}
 (function(){var v=document.querySelector('.hero-media video');var b=document.getElementById('unmuteBtn');var fb=document.querySelector('.video-fallback');
   function hideFb(){if(fb)fb.style.display='none';}
   function showFb(){if(fb)fb.style.display='flex';}
-  function syncBtn(){if(b)b.innerHTML=(v&&v.muted)?'🔇 Unmute':'🔊 Mute';}
+  /* The visible label is emoji + text, which screen readers announce
+     awkwardly — expose the same state as a plain accessible label. */
+  function syncBtn(){if(!b)return;b.innerHTML=(v&&v.muted)?'🔇 Unmute':'🔊 Mute';b.setAttribute('aria-label',(v&&v.muted)?'Unmute video':'Mute video');}
   if(v){
     v.addEventListener('loadeddata',hideFb);v.addEventListener('playing',hideFb);v.addEventListener('canplay',hideFb);
     v.addEventListener('error',showFb);var s=v.querySelector('source');if(s)s.addEventListener('error',showFb);
