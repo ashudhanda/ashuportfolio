@@ -613,10 +613,14 @@ if(window.gsap){
   var btn=document.getElementById('navToggle'),menu=document.getElementById('navMenu');
   if(!btn||!menu)return;
   function isOpen(){return menu.classList.contains('open');}
-  function setOpen(open){btn.setAttribute('aria-expanded',String(open));menu.classList.toggle('open',open);}
+  /* Lock body scroll while the dropdown is open, and drop the menu when
+     the viewport grows past the 820px breakpoint — the toggle is hidden
+     there, so a stale aria-expanded="true" would otherwise linger. */
+  function setOpen(open){btn.setAttribute('aria-expanded',String(open));menu.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
   btn.addEventListener('click',function(){setOpen(!isOpen());});
   menu.addEventListener('click',function(e){if(e.target&&e.target.closest&&e.target.closest('a'))setOpen(false);});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&isOpen()){setOpen(false);btn.focus();}});
+  window.addEventListener('resize',function(){if(window.innerWidth>820&&isOpen())setOpen(false);});
 })();
 
 /* ===== Back to top (native button handles Enter/Space) ===== */
