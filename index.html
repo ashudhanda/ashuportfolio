@@ -101,6 +101,8 @@ nav .cta{padding:9px 16px;border-radius:11px;background:var(--text);color:#fff;f
 }
 .shell{width:100%;max-width:1180px;margin:0 auto;padding:0 5vw}
 section{position:relative;z-index:1}
+/* anchored sections must land below the fixed nav pill (~66px tall), not under it */
+section[id]{scroll-margin-top:96px}
 footer{position:relative;z-index:1}
 .section-pad{padding:16vh 0}
 /* hero */
@@ -586,6 +588,25 @@ if(window.gsap){
   var skewSet=gsap.quickSetter('.skewElem','skewY','deg');var sp={s:0};var clampSkew=gsap.utils.clamp(-7,7);
   ScrollTrigger.create({onUpdate:function(self){var sk=clampSkew(self.getVelocity()/-320);if(Math.abs(sk)>Math.abs(sp.s)){sp.s=sk;gsap.to(sp,{s:0,duration:.7,ease:'power3',overwrite:true,onUpdate:function(){skewSet(sp.s);}});}}});
 }
+
+/* ===== In-page anchors: route through Lenis when it is running, so the
+   jump is smooth and lands below the fixed nav (scroll-margin-top covers
+   the native fallback). The skip link is left alone: it must jump at once. */
+(function(){
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    if(a.classList.contains('skip-link'))return;
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href');
+      if(!id||id.length<2)return;
+      var target=document.querySelector(id);
+      if(!target)return;
+      e.preventDefault();
+      if(window.lenis&&window.lenis.scrollTo){window.lenis.scrollTo(target,{offset:-96});}
+      else if(target.scrollIntoView){target.scrollIntoView({behavior:reduce?'auto':'smooth'});}
+    });
+  });
+})();
 
 /* ===== Mobile nav menu (below 820px the links are hidden until the toggle opens them) ===== */
 (function(){
