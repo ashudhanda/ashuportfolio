@@ -11,7 +11,8 @@ My personal portfolio — an immersive, scroll-driven website with 3D motion, gl
 - Sound toggle — mute the WebAudio click pop (bottom left)
 - Reduced motion — CSS animation and smooth scrolling switch off under `prefers-reduced-motion`
 - Skip link — the first Tab stop jumps straight to the main content
-- Mobile menu — below 820px the nav collapses to a toggle button (Escape closes it)
+- Mobile menu — below 820px the nav collapses to a toggle button (Escape closes it); body scroll locks while it is open, and it closes on resize past 820px
+- In-page anchors — nav and hero links scroll smoothly through Lenis (native smooth scroll when Lenis is off) and land below the fixed nav
 - Favicon + `og:url` — inline SVG favicon and the canonical URL of the live GitHub Pages site
 - Touch devices — the custom cursor ring/dot are hidden and the native pointer returns (they used to sit frozen mid-screen, since they only move on mousemove)
 - Mobile — the "Scroll to explore" indicator hides below 820px, where it printed over the fixed sound button
@@ -29,7 +30,7 @@ My personal portfolio — an immersive, scroll-driven website with 3D motion, gl
 - **Name reveal** — large animated name section
 - **About** — short bio, plus Frontend / Web Animation / UI-UX / AI Tools tags
 - **Skills** — horizontal-scrolling track of five cards (Frontend, Programming, Design, AI & Prompting, Tools)
-- **Projects** — three mock-window showcases: Animated Portfolio, Automation Toolkit (Python), Console Utilities (C). The Animated Portfolio card links to this repo; the other two have no live link yet, so their buttons are inert
+- **Projects** — three mock-window showcases: Animated Portfolio, Automation Toolkit (Python), Console Utilities (C). The Animated Portfolio card links to this repo; the other two have no live link yet, so their buttons read Coming soon
 - **Journey** — education timeline, ending in the current B.E. CSE run at Chitkara University
 - **Contact** — email, LinkedIn, and Instagram links
 
@@ -45,10 +46,11 @@ No build step — everything runs from the single `index.html`:
 ## ♿ Accessibility
 
 - **No-JS fallback** — the loader overlay is removed when JavaScript is off, so the page stays readable
-- **Reduced motion** — CSS animation and smooth scrolling switch off under `prefers-reduced-motion`, and the timed GSAP intro/enter animations are skipped too (scroll-linked motion follows the scroll position); back-to-top also scrolls instantly instead of smoothly
+- **Reduced motion** — CSS animation and smooth scrolling switch off under `prefers-reduced-motion`, and the timed GSAP intro/enter animations and the orb parallax are skipped too (scroll-linked motion follows the scroll position); back-to-top also scrolls instantly instead of smoothly
+- **Unmute button** — exposes its state as an accessible label (Unmute video / Mute video) instead of emoji alone
 - **Landmarks** — page sections sit inside a `<main>` landmark; the nav is labelled
 - **Keyboard** — back-to-top is a real button, so Enter/Space work without extra handlers; pressing Tab never unmutes the hero video (keyboard users unmute with the Unmute button)
-- **Mobile menu** — the toggle button reports `aria-expanded`, closes when a link is tapped or Escape is pressed, and returns focus to the toggle
+- **Mobile menu** — the toggle button reports `aria-expanded`, closes when a link is tapped or Escape is pressed, and returns focus to the toggle; body scroll locks while it is open, and it closes on resize past 820px
 - **Decorative numbers** — the large background numerals on the skill cards are hidden from assistive tech (the visible `01`–`05` labels already carry the number)
 
 ## 🚀 Run locally
