@@ -617,6 +617,26 @@ if(window.gsap){
   });
 })();
 
+/* ===== Nav scroll-spy: the link to the section in view carries
+   aria-current, so keyboard and screen-reader users know where they are. ===== */
+(function(){
+  var links={};
+  document.querySelectorAll('nav ul a[href^="#"]').forEach(function(a){links[a.getAttribute('href').slice(1)]=a;});
+  var ids=Object.keys(links);
+  if(!ids.length||!('IntersectionObserver' in window))return;
+  var current=null;
+  function setCurrent(id){
+    if(current===id)return;
+    if(current&&links[current])links[current].removeAttribute('aria-current');
+    current=id;
+    if(id&&links[id])links[id].setAttribute('aria-current','true');
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){if(en.isIntersecting)setCurrent(en.target.id);});
+  },{rootMargin:'-45% 0px -50% 0px'});
+  ids.forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el);});
+})();
+
 /* ===== Mobile nav menu (below 820px the links are hidden until the toggle opens them) ===== */
 (function(){
   var btn=document.getElementById('navToggle'),menu=document.getElementById('navMenu');
