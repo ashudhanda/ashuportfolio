@@ -16,6 +16,7 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Ashu Dhanda — Creative Developer" />
 <meta name="twitter:description" content="Portfolio of Ashu Dhanda, a Computer Science student from Panchkula building immersive, motion-driven web experiences." />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Ashu Dhanda","jobTitle":"Creative Developer","description":"Computer Science student from Panchkula building immersive, motion-driven web experiences.","affiliation":{"@type":"CollegeOrUniversity","name":"Chitkara University"},"sameAs":["https://www.linkedin.com/in/ashudhanda/","https://www.instagram.com/ashu_dhanda__/","https://github.com/ashudhanda"],"url":"https://ashudhanda.github.io/ashuportfolio/"}</script>
 <!-- Without JS the loader overlay would never hide, so remove it outright -->
 <noscript><style>#loader{display:none!important}</style></noscript>
   <!-- Google Analytics (GA4) -->
@@ -244,6 +245,9 @@ footer{display:flex;justify-content:space-between;align-items:center;padding:40p
 /* skip link: keyboard users jump straight to the content */
 .skip-link{position:fixed;top:-64px;left:16px;z-index:1100;padding:10px 16px;border-radius:12px;background:var(--text);color:#fff;font-size:14px;transition:top .2s}
 .skip-link:focus{top:16px}
+/* keyboard focus must stay obvious: the custom cursor hides the pointer,
+   so keyboard users get a clear accent outline, not the browser default */
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 /* without JS there is no custom cursor, so keep the native pointer visible */
 html:not(.js) body,html:not(.js) .btn,html:not(.js) .sound-btn,html:not(.js) .unmute,html:not(.js) .to-top{cursor:auto}
 html:not(.js) .nav-toggle{display:none}
