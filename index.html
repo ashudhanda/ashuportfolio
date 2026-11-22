@@ -114,12 +114,14 @@ footer{position:relative;z-index:1}
 .video-fallback .person{font-family:var(--display);color:#8a80c8;text-align:center;font-size:15px}
 .video-fade{position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 24%,rgba(243,241,251,.9) 46%,rgba(243,241,251,.5) 64%,rgba(243,241,251,0) 88%),linear-gradient(0deg,var(--bg),transparent 22%),linear-gradient(180deg,var(--bg),transparent 16%)}
 .unmute{position:absolute;bottom:22px;right:22px;z-index:6;padding:10px 16px;border-radius:12px;font-size:13px;cursor:none;display:flex;align-items:center;gap:8px;color:var(--text)}
-.scroll-ind{position:absolute;bottom:26px;left:5vw;z-index:6;font-size:12px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.scroll-ind{position:absolute;bottom:26px;left:max(5vw,150px);z-index:6;font-size:12px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;display:flex;align-items:center;gap:10px}
 .scroll-ind .mouse{width:22px;height:36px;border:2px solid var(--muted);border-radius:12px;position:relative}
 .scroll-ind .mouse::after{content:'';position:absolute;top:7px;left:50%;transform:translateX(-50%);width:4px;height:7px;border-radius:2px;background:var(--muted);animation:wheel 1.4s ease-in-out infinite}
 @keyframes wheel{0%{opacity:0;transform:translate(-50%,0)}40%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
 /* below 820px the fixed sound button sits bottom-left too, so the scroll
-   indicator would print over it — hide it there, the hero still scrolls */
+   indicator would print over it — hide it there, the hero still scrolls.
+   Above 820px it starts at max(5vw,150px): 5vw alone still lands on the
+   sound button (ends ~78px) and its "Sound" label (ends ~135px). */
 @media(max-width:820px){.scroll-ind{display:none}}
 .hero-content{position:relative;z-index:2}
 .hero-overlay{max-width:620px}
