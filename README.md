@@ -14,8 +14,10 @@ My personal portfolio — an immersive, scroll-driven website with 3D motion, gl
 - Mobile menu — below 820px the nav collapses to a toggle button (Escape closes it); body scroll locks while it is open, and it closes on resize past 820px
 - In-page anchors — nav and hero links scroll smoothly through Lenis (native smooth scroll when Lenis is off) and land below the fixed nav
 - Favicon + `og:url` — inline SVG favicon and the canonical URL of the live GitHub Pages site
-- Touch devices — the custom cursor ring/dot are hidden and the native pointer returns (they used to sit frozen mid-screen, since they only move on mousemove)
-- Mobile — the "Scroll to explore" indicator hides below 820px, where it printed over the fixed sound button
+- JSON-LD — `Person` structured data (name, role, Chitkara affiliation, LinkedIn/Instagram/GitHub profiles)
+- Nav scroll-spy — the link to the section in view carries `aria-current`
+- Anchor hash sync — clicking a nav/hero link updates the URL hash, so sections are deep-linkable and Back works
+- Scroll indicator — starts clear of the fixed sound button and its "Sound" label (`left: max(5vw, 150px)`); hidden below 820px, where it printed over the button
 
 ## 🛠 Tech Stack
 
@@ -46,7 +48,9 @@ No build step — everything runs from the single `index.html`:
 ## ♿ Accessibility
 
 - **No-JS fallback** — the loader overlay is removed when JavaScript is off, so the page stays readable
-- **Reduced motion** — CSS animation and smooth scrolling switch off under `prefers-reduced-motion`, and the timed GSAP intro/enter animations and the orb parallax are skipped too (scroll-linked motion follows the scroll position); back-to-top also scrolls instantly instead of smoothly
+- **Reduced motion** — CSS animation and smooth scrolling switch off under `prefers-reduced-motion`, and the timed GSAP intro/enter animations, the orb parallax and the scroll-velocity skew are skipped too (scroll-linked motion follows the scroll position); back-to-top also scrolls instantly instead of smoothly
+- **Focus** — keyboard users get a visible accent outline (`:focus-visible`) instead of the browser default
+- **Touch devices** — the custom cursor ring/dot are hidden and the native pointer returns (they used to sit frozen mid-screen, since they only move on mousemove); the cursor animation loop does not even start on coarse pointers
 - **Unmute button** — exposes its state as an accessible label (Unmute video / Mute video) instead of emoji alone
 - **Landmarks** — page sections sit inside a `<main>` landmark; the nav is labelled
 - **Keyboard** — back-to-top is a real button, so Enter/Space work without extra handlers; pressing Tab never unmutes the hero video (keyboard users unmute with the Unmute button)
