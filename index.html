@@ -431,6 +431,10 @@ html:not(.js) .nav-toggle{display:none}
 
 /* ===== Custom cursor: blend-difference dot (instant) + lagging ring, NO trail ===== */
 (function(){
+  /* On coarse pointers the ring/dot are display:none (see the CSS media
+     query), so there is nothing to move — skip the rAF loop and the
+     listeners entirely instead of animating hidden nodes forever. */
+  if(window.matchMedia&&window.matchMedia('(pointer: coarse)').matches)return;
   var ring=document.getElementById('cursorRing'),dot=document.getElementById('cursorDot');if(!ring||!dot)return;
   var mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
   window.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)';});
