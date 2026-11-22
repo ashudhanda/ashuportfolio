@@ -611,17 +611,28 @@ if(window.gsap){
    the native fallback). The skip link is left alone: it must jump at once. */
 (function(){
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function scrollToId(id){
+    var target=document.querySelector(id);
+    if(!target)return false;
+    if(window.lenis&&window.lenis.scrollTo){window.lenis.scrollTo(target,{offset:-96});}
+    else if(target.scrollIntoView){target.scrollIntoView({behavior:reduce?'auto':'smooth'});}
+    return true;
+  }
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
     if(a.classList.contains('skip-link'))return;
     a.addEventListener('click',function(e){
       var id=a.getAttribute('href');
       if(!id||id.length<2)return;
-      var target=document.querySelector(id);
-      if(!target)return;
+      if(!scrollToId(id))return;
       e.preventDefault();
-      if(window.lenis&&window.lenis.scrollTo){window.lenis.scrollTo(target,{offset:-96});}
-      else if(target.scrollIntoView){target.scrollIntoView({behavior:reduce?'auto':'smooth'});}
+      /* Keep the URL in sync so sections are deep-linkable and Back works
+         (pushState fires no hashchange, so this cannot double-scroll). */
+      if(window.history&&window.history.pushState)window.history.pushState(null,'',id);
     });
+  });
+  /* Back/forward, or a pasted #section link, must scroll the same way. */
+  window.addEventListener('hashchange',function(){
+    if(window.location.hash)scrollToId(window.location.hash);
   });
 })();
 
