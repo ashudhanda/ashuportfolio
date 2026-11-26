@@ -675,7 +675,11 @@ if(window.gsap){
 })();
 
 /* ===== Back to top (native button handles Enter/Space) ===== */
-(function(){var t=document.querySelector('.to-top');if(!t)return;var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;t.addEventListener('click',function(){window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});});})();
+/* Rides Lenis when it is running: a native smooth scrollTo fights Lenis's
+   scroll loop, which is why the anchor handler already routes through it.
+   Without Lenis it is a native smooth scroll, instant under reduced
+   motion either way. */
+(function(){var t=document.querySelector('.to-top');if(!t)return;var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;t.addEventListener('click',function(){if(window.lenis&&window.lenis.scrollTo){window.lenis.scrollTo(0,{immediate:reduce});}else{window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});}});})();
 </script>
 </body>
 </html>
