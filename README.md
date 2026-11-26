@@ -10,14 +10,16 @@ My personal portfolio — an immersive, scroll-driven website with 3D motion, gl
 - Custom interactions and transitions
 - Sound toggle — mute the WebAudio click pop (bottom left)
 - Reduced motion — CSS animation and smooth scrolling switch off under `prefers-reduced-motion`
-- Skip link — the first Tab stop jumps straight to the main content
+- Skip link — the first Tab stop jumps straight to the main content and moves keyboard focus there
 - Mobile menu — below 820px the nav collapses to a toggle button (Escape closes it); body scroll locks while it is open, and it closes on resize past 820px
-- In-page anchors — nav and hero links scroll smoothly through Lenis (native smooth scroll when Lenis is off) and land below the fixed nav
+- In-page anchors — nav and hero links scroll smoothly through Lenis (native smooth scroll when Lenis is off) and land below the fixed nav; Back to the plain URL scrolls back to the top
+- Back to top — scrolls through Lenis when it is running, so it never fights the smooth-scroll loop (native smooth scroll otherwise)
 - Favicon + `og:url` — inline SVG favicon and the canonical URL of the live GitHub Pages site
 - JSON-LD — `Person` structured data (name, role, Chitkara affiliation, LinkedIn/Instagram/GitHub profiles)
-- Nav scroll-spy — the link to the section in view carries `aria-current`
+- Nav scroll-spy — the link to the section in view carries `aria-current`, including the Let's talk link to the contact section
 - Anchor hash sync — clicking a nav/hero link updates the URL hash, so sections are deep-linkable and Back works
 - Scroll indicator — starts clear of the fixed sound button and its "Sound" label (`left: max(5vw, 150px)`); hidden below 820px, where it printed over the button
+- Project tilt — the mock window inside each project card tilts with the mouse; the card itself keeps its scroll parallax
 
 ## 🛠 Tech Stack
 
