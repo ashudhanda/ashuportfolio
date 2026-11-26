@@ -592,7 +592,12 @@ if(window.gsap){
   var fill=document.getElementById('tlFill');
   if(fill){gsap.to(fill,{height:'100%',ease:'none',scrollTrigger:{trigger:'.timeline',start:'top 60%',end:'bottom 70%',scrub:1}});}
   gsap.utils.toArray('.project-media').forEach(function(el){gsap.fromTo(el,{y:60},{y:-60,ease:'none',scrollTrigger:{trigger:el,start:'top bottom',end:'bottom top',scrub:1}});});
-  document.querySelectorAll('.tilt').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();var x=(e.clientX-r.left)/r.width-.5;var y=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(900px) rotateY('+(x*8)+'deg) rotateX('+(-y*8)+'deg) scale(1.02)';});c.addEventListener('mouseleave',function(){c.style.transform='perspective(900px) rotateY(0) rotateX(0)';});});
+  /* The tilt must turn the mock window inside the card, not the card
+     itself: .project-media's transform is owned by GSAP's scroll scrub
+     (y: 60 -> -60), which rewrites style.transform on every scroll tick
+     and wipes the tilt. The inner .win has no GSAP transform, so the
+     tilt survives there. */
+  document.querySelectorAll('.tilt').forEach(function(c){var t=c.querySelector('.win')||c;c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();var x=(e.clientX-r.left)/r.width-.5;var y=(e.clientY-r.top)/r.height-.5;t.style.transform='perspective(900px) rotateY('+(x*8)+'deg) rotateX('+(-y*8)+'deg) scale(1.02)';});c.addEventListener('mouseleave',function(){t.style.transform='perspective(900px) rotateY(0) rotateX(0)';});});
 
   if(!reduceMotion){
   gsap.utils.toArray('.mask-inner').forEach(function(s){gsap.from(s,{yPercent:118,duration:1.1,ease:'power4.out',scrollTrigger:{trigger:s,start:'top 90%'}});});
