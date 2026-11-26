@@ -635,7 +635,12 @@ if(window.gsap){
   });
   /* Back/forward, or a pasted #section link, must scroll the same way. */
   window.addEventListener('hashchange',function(){
-    if(window.location.hash)scrollToId(window.location.hash);
+    if(window.location.hash){scrollToId(window.location.hash);return;}
+    /* Back to the hash-less URL must land at the top: pushState entries
+       record no scroll position, so without this the page stays put on
+       the section while the URL claims the top. */
+    if(window.lenis&&window.lenis.scrollTo){window.lenis.scrollTo(0,{immediate:reduce});}
+    else{window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});}
   });
 })();
 
