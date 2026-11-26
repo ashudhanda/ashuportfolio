@@ -245,6 +245,9 @@ footer{display:flex;justify-content:space-between;align-items:center;padding:40p
 /* skip link: keyboard users jump straight to the content */
 .skip-link{position:fixed;top:-64px;left:16px;z-index:1100;padding:10px 16px;border-radius:12px;background:var(--text);color:#fff;font-size:14px;transition:top .2s}
 .skip-link:focus{top:16px}
+/* the skip link moves focus to <main>, so the jump lands keyboard focus
+   there too — but a focus ring around the whole page is noise */
+#main:focus{outline:none}
 /* keyboard focus must stay obvious: the custom cursor hides the pointer,
    so keyboard users get a clear accent outline, not the browser default */
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
@@ -285,7 +288,7 @@ html:not(.js) .nav-toggle{display:none}
   </ul>
   <a href="#contact" class="cta magnetic">Let’s talk</a>
 </nav>
-<main id="main">
+<main id="main" tabindex="-1">
 <section id="hero">
   <div class="hero-media" id="heroMedia">
     <video autoplay playsinline muted aria-hidden="true">
