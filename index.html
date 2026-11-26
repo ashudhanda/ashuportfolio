@@ -648,7 +648,10 @@ if(window.gsap){
    aria-current, so keyboard and screen-reader users know where they are. ===== */
 (function(){
   var links={};
-  document.querySelectorAll('nav ul a[href^="#"]').forEach(function(a){links[a.getAttribute('href').slice(1)]=a;});
+  /* Every nav link counts, including the "Let's talk" CTA to #contact —
+     it was left out of the spy, so no link carried aria-current on the
+     contact section. */
+  document.querySelectorAll('nav a[href^="#"]').forEach(function(a){links[a.getAttribute('href').slice(1)]=a;});
   var ids=Object.keys(links);
   if(!ids.length||!('IntersectionObserver' in window))return;
   var current=null;
